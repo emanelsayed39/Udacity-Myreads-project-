@@ -6,6 +6,7 @@ This is MyRead Project
 
 To get started developing right away:
 
+* install debounce library with npm i --save lodash.debounce
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
