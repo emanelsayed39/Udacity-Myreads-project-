@@ -12,8 +12,13 @@ const SearchBooks=(props)=>{
   * @description handle the text change event of the search text book ,it sends a search request to the book API with search query
   * @param e the text change event argument
   */
+const ClearSearch=(resultCount)=>{
+ SetSearchResult([]);
+ SetResultCount(resultCount); 
+}
+
 const Search=(e)=>{
- if (e.keyCode === 13 & e.target.value !=="") {       
+ if (e.target.value !=="") {       
   BooksAPI.search(e.target.value).then((result)=>{
    if(!result.error) {
     result.map(book=> {
@@ -30,13 +35,13 @@ const Search=(e)=>{
     SetResultCount(result.length);               
    }
    else{
-    SetResultCount(0);
+   ClearSearch(0);
    // return false;
    }
   })
  }
  else{
-  SetResultCount(-1);
+  ClearSearch(-1);
  // return false;
  }
  return true;
@@ -70,7 +75,7 @@ const AddToShelf=(bookId,shelf)=>{
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-    <input type="text" placeholder="Search by title or author and press enter" onKeyUp={(e)=>Search(e)}/>       
+    <input type="text" placeholder="Search by title or author" onChange={(e)=>Search(e)}/>       
    </div>
   </div>
   <div className="search-books-results">
